@@ -453,3 +453,6 @@ async def download(request: Request, db: Session = Depends(get_db)):
             f.write(i + '\n')
 
     return FileResponse(path = file_path, filename = 'transactions.txt', media_type = 'text/txt')
+
+
+#111111111111111111111111111111111111111111111111111111111111111111111111111
