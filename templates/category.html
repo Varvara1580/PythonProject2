@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Финансовый трекер</title>
+    <link rel="icon" href="/static/icon.png" type="image/png">
+    <style>
+        body
+        {
+            background-image: url('/static/img/2.png');
+            background-size: contain;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .new, .category, .link
+        {
+            border: 2px solid #007bff;
+            border-radius: 30px;
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* тень */
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .link
+        {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Категории</h1>
+    {% if request.query_params.get('error') == 'category_in_use' %}
+        <p class = 'error'>Категорию нельзя удалить, пока к ней привязаны операции</p>
+    {% endif %}
+    <form method = 'POST' action = '/category' class = 'new'>
+        <h2>Добавить категорию</h2>
+        <p>Название категории</p>
+        <input type = 'text' name = 'title'>
+        <p>Тип операции</p>
+        <select name = 'type'>
+            <option value = 'income'>Доход</option>
+            <option value = 'expense'>Расход</option>
+        </select><br><br>
+        <button type = 'submit'>Добавить категорию</button>
+    </form>
+    {% if category %}
+        <h1>Список категорий</h1>
+    {% endif %}
+    {% for i in category %}
+        <div class = 'category'>
+            <p>{{ i.title }} - {{ i.type }}</p>
+            <form method = 'POST' action = '/category/delete/{{ i.id }}'>
+                <button type = 'submit'>Удалить</button>
+            </form>
+        </div>
+    {% endfor %}
+    <div class = 'link'>
+        <a href = '/transaction/add'>Операции</a><br>
+        <a href = '/analitic'>Аналитика</a><br>
+        <a href = '/'>На главную</a><br>
+        <a href = '/logout'>Выйти</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Финансовый трекер</title>
+    <link rel="icon" href="/static/icon.png" type="image/png">
+    <style>
+        body
+        {
+            background-image: url('/static/img/2.png');
+            background-size: cover;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .balance, .link
+        {
+            border: 2px solid #007bff;
+            border-radius: 30px;
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* тень */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Финансовый трекер</h1>
+    <div class = 'balance'>
+        <p>Доходы {{ stat.income }}</p>
+        <p>Расходы {{ stat.expense }}</p>
+        <p>Баланс {{ stat.balance }}</p>
+    </div><br>
+
+    <div class = 'link'>
+        <a href = '/transaction/add'>Операции</a><br>
+        <a href = '/category'>Категории</a><br>
+        <a href = '/analitic'>Аналитика</a><br>
+        <a href = '/logout'>Выйти</a>
+    </div>
+</body>
+</html>

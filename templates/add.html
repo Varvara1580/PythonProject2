@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Финансовый трекер</title>
+    <link rel="icon" href="/static/icon.png" type="image/png">
+    <style>
+        body
+        {
+            background-image: url('/static/img/2.png');
+            background-size: contain;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .new, .search, .transaction, .link
+        {
+            border: 2px solid #007bff;
+            border-radius: 30px;
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* тень */
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .link
+        {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Операции</h1>
+    <form method = 'POST' action = '/transaction/add' class = 'new'>
+        <h2>Добавить операцию</h2>
+        <p>Название</p>
+        <input type = 'text' name = 'title'>
+        <p>Сумма</p>
+        <input type = 'number' name = 'cost' min = '1'>
+        <p>Категория</p>
+        <select name = 'category_id'>
+            {% for i in category %}
+                <option value = '{{ i.id }}'>{{ i.title }} - {{ i.type }}</option>
+            {% endfor %}
+        </select><br><br>
+        <button type = 'submit'>Добавить операцию</button>
+    </form>
+    <form method = 'GET' action = '/transaction/add' class = 'search'>
+        <h2>Поиск операций</h2>
+        <p>Название</p>
+        <input type = 'text' name = 'search'>
+        <p>Минимальная дата совершения</p>
+        <input type = 'date' name = 'date_from'>
+        <p>Максмальная дата совершения</p>
+        <input type = 'date' name = 'date_to'>
+        <p>Минимальная сумма</p>
+        <input type = 'number' name = 'min_amount' min = '1'>
+        <p>Максимальная сумма</p>
+        <input type = 'number' name = 'max_amount' min = '1'><br><br>
+        <button type = 'submit'>Найти операции</button>
+    </form>
+    {% for i in transactions %}
+        <div class = 'transaction'>
+            <p>Операция {{ i.title }} - {{ i.category.type }}</p>
+            <p>Тип: {% if i.category.type == 'income' %}доход{% else %}расход{% endif %}</p>
+            <p>Стоимость: {{ i.cost }}</p>
+            <p>Дата совершения: {{ i.date }}</p>
+            <form method = 'POST' action = '/transaction/delete/{{ i.id }}'>
+                <button type = 'submit'>Удалить</button>
+            </form>
+        </div>
+    {% endfor %}
+    <form action = '/upload' method = 'POST' enctype = 'multipart/form-data'>
+        <input type = 'file' name = 'file'>
+        <button type = 'submit'>Загрузить</button>
+    </form>
+    <form action = '/download' method = 'GET' enctype = 'multipart/form-data'>
+        <button type = 'submit'>Скачать файл</button>
+    </form>
+    <div class = 'link'>
+        <a href = '/category'>Категории</a><br>
+        <a href = '/analitic'>Аналитика</a><br>
+        <a href = '/'>На главную</a><br>
+        <a href = '/logout'>Выйти</a>
+    </div>
+</body>
+</html>
