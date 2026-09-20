@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Финансовый трекер</title>
-    <link rel="icon" href="/static/icon.png" type="image/png">
+    <link rel="icon" href="/icon.png" type="image/png">
     <style>
         body
         {
-            background-image: url('/static/img/2.png');
+            background-image: url('/img/2.png');
             background-size: cover;
             text-align: center;
             display: flex;
@@ -25,31 +25,23 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* тень */
             padding-bottom: 20px;
         }
+
     </style>
 </head>
 <body>
-    <h1>Регистрация</h1>
+    <h1>Вход</h1>
     <div class = 'container'>
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
-        <form method = 'POST' action = '/register'>
+        <form method = 'POST' action = '/login'>
             <label>username</label><br>
             <input type = 'text' name = 'username'><br>
-            <label>email</label><br>
-            <input type = 'text' name = 'email'><br>
             <label>password</label><br>
             <input type = 'text' name = 'password'><br>
-            <label>role</label><br>
-            <select name = 'role'>
-                <option value = 'user'>user</option>
-                <option value = 'admin'>admin</option>
-            </select><br>
-            <label>Пароль для админа</label><br>
-            <input type = 'text' name = 'admin_password' value = 'Текст по умолчанию'><br>
-            <button type = 'submit'>Зарегистрироваться</button><br>
+            <button type = 'submit'>Вход</button><br>
         </form>
-        <a href = '/login'>Войти</a>
+        <a href = '/register'>Зарегистрироваться</a>
     </div>
 </body>
 </html>

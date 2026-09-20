@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
-from Models import Transaction, Category
+from app.Models import Transaction, Category
 
 def create_category(title: str, type: str, user_id: int, db: Session):
     t = Category(title = title, type = type, user_id = user_id)
