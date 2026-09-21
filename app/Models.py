@@ -1,4 +1,4 @@
-from database import Base
+from app.database import Base
 from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from sqlalchemy import Table, create_engine, Integer, String, select, ForeignKey, Table, Column, DateTime, Text, LargeBinary, Boolean
