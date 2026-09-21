@@ -27,9 +27,9 @@ from fastapi.staticfiles import StaticFiles
 app = FastAPI(title="Site without JS")
 
 
-app.mount('./static', StaticFiles(directory = 'static'), name = 'static')
+app.mount('/static', StaticFiles(directory = 'app/static'), name = 'static')
 # Указываем папку, где лежат HTML-шаблоны
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="app/templates")
 
 Base.metadata.create_all(bind = engine)
 
