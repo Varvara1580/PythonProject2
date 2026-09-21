@@ -8,13 +8,13 @@ from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse,
 # Jinja2Templates — подключаем шаблоны (HTML-файлы с подстановками {{ ... }})
 from fastapi.templating import Jinja2Templates
 
-from database import *
-from services import *
+from app.database import *
+from app.services import *
 from jose import jwt, JWTError
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
 
-from Models import *
+from app.Models import *
 from datetime import datetime, timedelta, timezone, date
 
 
